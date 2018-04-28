@@ -12,13 +12,13 @@ import com.example.demo.User;
 import com.example.demo.UserRepository;
 
 @Controller
-@RequestMapping(path="/main")
+@RequestController
 public class MainController {
 	
 	@Autowired
 	private UserRepository userRepository;
 	
-	@GetMapping(path="/add")
+	@RequestMapping(path="/add",method=RequestMethod.POST)
 	public @ResponseBody String addNewUser (
 			@RequestParam String username,
 			@RequestParam String password) {
@@ -29,7 +29,8 @@ public class MainController {
 		userRepository.save(n);
 		return "saved";
 		}
-	@GetMapping(path="/all")
+	
+	@RequestMapping(path="/all", method=RequestMethod.GET)
 	public @ResponseBody Iterable<User> getAllUsers() {
 		return userRepository.findAll();
 	}
